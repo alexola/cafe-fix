@@ -4,16 +4,23 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+const bcrypt             = require('bcrypt');
 
+const passport           = require('passport');
+const LocalStrategy      = require('passport-local').Strategy;
+const connectSession = require("connect-ensure-login");
 var index = require('./routes/index');
 var users = require('./routes/users');
 
+const session    = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 var app = express();
+const mongoose = require('mongoose');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+mongoose.connect("mongodb://localhost:27017/coffee-fix");
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
