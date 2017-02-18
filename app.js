@@ -11,7 +11,7 @@ const LocalStrategy      = require('passport-local').Strategy;
 const connectSession = require("connect-ensure-login");
 var index = require('./routes/index');
 var users = require('./routes/users');
-
+var authController = require('./routes/authController');
 const session    = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 var app = express();
@@ -29,8 +29,33 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+ secret: 'Find a fixer near you',
+ resave: true,
+ saveUninitialized: true,
+ cookie: { maxAge: 60000 },
+ store: new MongoStore({
+   mongooseConnection: mongoose.connection,
+   ttl: 24 * 60 * 60 // 1 day
+ })
+}));
+
+app.use((req, res, next) => {
+ if (req.session.currentUser) {
+   res.locals.currentUserInfo = req.session.currentUser;
+   res.locals.isUserLoggedIn = true;
+ } else {
+   res.locals.isUserLoggedIn = false;
+ }
+
+ next();
+});
+
 app.use('/', index);
 app.use('/users', users);
+
+
+app.use('/', authController);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
