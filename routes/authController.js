@@ -67,6 +67,19 @@ router.get('/login', (req, res, next) => {
  });
 });
 
+router.get('/profile', (req, res, next) => {
+ const userName = req.session.currentUser.name;
+User.find({}, (err, users) => {
+
+  if (err) { return next(err)}
+   res.render('fixers/fixer-profile', {
+    users : userName
+
+  });
+});
+});
+
+
 router.post('/login', (req, res, next) => {
  const emailInput = req.body.email;
  const passwordInput = req.body.password;
@@ -94,7 +107,7 @@ router.post('/login', (req, res, next) => {
    }
 
    req.session.currentUser = theUser;
-   res.redirect('/');
+   res.redirect('/profile');
  });
 });
 
@@ -114,6 +127,33 @@ router.get('/logout', (req, res, next) => {
    res.redirect('/');
  });
 });
+
+
+
+// router.get("/profile/:id", (req, res, next) => {
+//   let userId = req.params.id;
+//   User.findById(userId, (err, users) =>{
+//     if (err) {
+//       next(err);
+//     } else {
+//       res.render("fixers/fixer-profile", {users: user});
+//     }
+//   });
+// });
+
+
+// router.get('/search', (req, res, next) => {
+// User.find({}, (err, users) => {
+//
+//   if (err) { return next(err) }
+//
+//   res.render('map/search', {
+//     users: users
+//   });
+// });
+// });
+//
+//
 
 
 module.exports = router;

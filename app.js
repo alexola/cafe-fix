@@ -4,14 +4,19 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+const flash          = require("connect-flash");
 const bcrypt             = require('bcrypt');
-
 const passport           = require('passport');
 const LocalStrategy      = require('passport-local').Strategy;
 const connectSession = require("connect-ensure-login");
+
+
 var index = require('./routes/index');
 var users = require('./routes/users');
+
 var authController = require('./routes/authController');
+const fixing = require("./routes/fixing");
+
 const session    = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 var app = express();
@@ -33,7 +38,7 @@ app.use(session({
  secret: 'Find a fixer near you',
  resave: true,
  saveUninitialized: true,
- cookie: { maxAge: 60000 },
+ cookie: { maxAge: 500000 },
  store: new MongoStore({
    mongooseConnection: mongoose.connection,
    ttl: 24 * 60 * 60 // 1 day
@@ -51,11 +56,10 @@ app.use((req, res, next) => {
  next();
 });
 
-app.use('/', index);
-app.use('/users', users);
-
-
+// app.use('/', index);
+// app.use('/users', users);
 app.use('/', authController);
+app.use("/", fixing);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

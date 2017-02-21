@@ -9,6 +9,8 @@ const userSchema = new Schema({
  fee: { type: Number, default: null }
 });
 
+
+
 userSchema.set('timestamps', true);
 
 const User = mongoose.model('User', userSchema);
