@@ -7,10 +7,7 @@ const router = express.Router();
 
 
 
-router.get("/profile", (req, res, err) => {
-    res.render("fixers/fixer-profile");
 
-});
 
 router.get('/fixers/:id', (req, res, next) => {
   const fixerId = req.params.id;

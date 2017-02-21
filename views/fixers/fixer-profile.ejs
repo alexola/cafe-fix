@@ -16,22 +16,27 @@
 <div class="navbar">
 
   <div id="header">mend</div>
-  <a href="/suggestion" id="suggestion-button">My Suggestions</a>
-  <a href="/logout" id="log-out">Log Out</a>
+  <a href="/suggestion" id="nav-button">Suggestions</a>
+  <a href="/logout" id="nav-button">Log Out</a>
 
 </div>
 
 <div class="container-fluid">
 
-  <div id="welcome-user">
-  <h2>Welcome back, <%= users %> ! </h2>
+<!-- USER PICTURE AND WELCOME -->
+ <div id="welcome-user">
+   <img id="profile-picture" class="img-circle" class="span4"
+    src="http://i1.wp.com/www.thisblogrules.com/wp-content/uploads/2010/02/batman-for-facebook.jpg?resize=250%2C280">
+  <h2 id="welcome-name"> Welcome back, <%= user.name %> ! </h2>
   </div>
-
-<h3>What do you need fixed?</h3>
 
 
 <div class="row">
 <div class="container-fluid">
+
+    <h3>What do you need fixed?</h3>
+
+
     <form id="item-form">
       <input type="text" placeholder="item..." class="user-item"> in
       <div class="btn-group">
@@ -43,33 +48,24 @@
                 <li><input type="checkbox" name="category" id="toys" value="Toys">Toys<br></li>
               </ul>
       </div>
-      <input type="submit" name="Add" value="add">
+      <button type="button" name="Add" value="add" id="add-item-button">Add</button>
+
+    <!-- INVISIBLE USER ID INPUT -->
+      <input type="text" id="user-id" value="<%= user._id%>">
       <!-- <input type="submit" name="Remove" value="remove"> -->
 
     </form>
 
     <div id="new-items">
+      <table>
+      <thead>Your Items</thead>
+
+      </table>
 
     </div>
 
 </div>
 
-<!-- REVIEWS BOX -->
-    <!-- <div class="row" id="post-review-box">
-                   <div class="col-md-12">
-                       <form accept-charset="UTF-8" action="" method="post">
-                         <div class="rating"><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span></div>
-                           <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5"></textarea>
-
-                           <div class="text-right">
-                               <div class="stars starrr" data-rating="0"></div>
-                               <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
-                               <span class="glyphicon glyphicon-remove"></span>Cancel</a>
-                               <button class="btn btn-success btn-lg" type="submit">Save</button>
-                           </div>
-                       </form>
-                   </div>
-               </div> -->
 
 </div>
 </div>

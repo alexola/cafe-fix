@@ -6,7 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const flash          = require("connect-flash");
 const bcrypt             = require('bcrypt');
-const passport           = require('passport');
+// const passport           = require('passport');
+const passport = require('./helpers/passport');
+const auth           = require('./helpers/auth');
 const LocalStrategy      = require('passport-local').Strategy;
 const connectSession = require("connect-ensure-login");
 
@@ -34,30 +36,34 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// session
 app.use(session({
- secret: 'Find a fixer near you',
- resave: true,
- saveUninitialized: true,
- cookie: { maxAge: 500000 },
- store: new MongoStore({
-   mongooseConnection: mongoose.connection,
-   ttl: 24 * 60 * 60 // 1 day
- })
+  secret           : "passport-local-strategy",
+  resave           : true,
+  saveUninitialized: true,
+  cookie           : { maxAge: new Date(Date.now + 50000000000) }
 }));
 
-app.use((req, res, next) => {
- if (req.session.currentUser) {
-   res.locals.currentUserInfo = req.session.currentUser;
-   res.locals.isUserLoggedIn = true;
- } else {
-   res.locals.isUserLoggedIn = false;
- }
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
- next();
-});
 
+// app.use((req, res, next) => {
+//  if (req.session.currentUser) {
+//    res.locals.currentUserInfo = req.session.currentUser;
+//    res.locals.isUserLoggedIn = true;
+//  } else {
+//    res.locals.isUserLoggedIn = false;
+//  }
+//
+//  next();
+// });
+
+
+app.use(auth.setCurrentUser);
 // app.use('/', index);
-// app.use('/users', users);
+app.use('/users', users);
 app.use('/', authController);
 app.use("/", fixing);
 
@@ -78,5 +84,14 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+// app.use(function(err, req, res, next) {
+//   // set locals, only providing error in development
+//   res.locals.message = err.message;
+//   res.locals.error = req.app.get('env') === 'development' ? err : {};
+//
+//   // render the error page
+//   res.status(err.status || 500);
+//   res.render('error');
+// });
 
 module.exports = app;
