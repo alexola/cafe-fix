@@ -8,10 +8,10 @@ const passport 			= require('passport');
 const LocalStrategy = require("passport-local").Strategy;
 const bcryptSalt = 10;
 
-
 router.get('/', function(req, res, next) {
   res.render('index');
 });
+// router.get("/suggestion", (req, res, err) => {
 
 router.get('/profile', auth.checkLoggedIn('You must be logged in', '/login'), function(req, res, next) {
   console.log('user ', req.user);
@@ -21,27 +21,38 @@ router.get('/profile', auth.checkLoggedIn('You must be logged in', '/login'), fu
     } else {
         console.log('items ', items);
         res.render('fixers/fixer-profile', { user: req.user, items: items });
-    }
+      }
   });
-
-});
-
-// router.get("/suggestion", (req, res, err) => {
-//
-// User.find({}, (err, user)  => {
-//   if (err) {
-//     next(err);
+//   User.find({}, (err, user) => {
+//     if (err) {
+//       next(err);
 //   } else {
-//     res.render(7', { user: req.user});
+//       res.render('fix/suggestion', {
+//         user: req.user
+//     });
 //   }
 // });
-//
-// });
+
+  // });
+});
+
+router.get("/suggestion", auth.checkLoggedIn('You must be logged in', '/login'), (req, res, err) => {
+
+Item.find({}, (err, user)  => {
+  if (err) {
+    next(err);
+  } else {
+    res.render('fix/suggestion', { user: req.user});
+  }
+});
+
+});
 
 
 router.get('/signup', function(req, res, next) {
   res.render('auth/signup', { "message": req.flash("error") });
 });
+
 
 router.post("/signup", (req, res, next) => {
   var name = req.body.name;
@@ -98,6 +109,8 @@ router.post("/signup", (req, res, next) => {
 
 router.get("/login", (req, res, next) => {
   res.render("auth/login", { "message": req.flash("error") });
+
+
 });
 
 router.post("/login", passport.authenticate("local", {
@@ -107,6 +120,7 @@ router.post("/login", passport.authenticate("local", {
   passReqToCallback: true
 }));
 
+
 router.get("/logout", (req, res) => {
   req.logout();
   delete res.locals.currentUser;
@@ -114,9 +128,19 @@ router.get("/logout", (req, res) => {
   // delete currentUser and passport properties
   // becasuse when we calling req.logout() is leaving an empty object inside both properties.
   res.redirect('/');
-
-
 });
+// router.get('/profile', (req, res, next) => {
+//  const userName = req.session.currentUser.name;
+// User.find({}, (err, users) => {
+//
+//   if (err) { return next(err)}
+//    res.render('fixers/fixer-profile', {
+//     users : userName
+//
+//   });
+// });
+// });
+
 
 
 

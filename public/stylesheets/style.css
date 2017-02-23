@@ -1,4 +1,5 @@
 body {
+<<<<<<< HEAD
   font-size: 12px;
   font-family: "Montserrat", sans-serif;
 }
@@ -34,19 +35,45 @@ body {
 
 .col-xs-8 {
   text-align: center;
+=======
+ font-size: 12px;
+ font-family: "Montserrat", sans-serif;
+}
+
+#header {
+ font-size: 2.8em;
+ letter-spacing: 6px;
+ margin-left: 10px;
+ color: white;
+ font-family: "Montserrat", sans-serif;
+
+}
+
+.form-title {
+ font-size: 1.6em;
+}
+
+.navbar {
+ background-color: rgb(82, 207, 226);
+}
+
+.col-xs-8 {
+ text-align: center;
+>>>>>>> Acoffee
 }
 
 
 a {
-  color: #00B7FF;
+ color: #00B7FF ;
 }
 
 #form {
-  margin: 30px auto;
-  width: 380px;
+ margin: 30px auto;
+ width: 380px;
 }
 
 .name-input {
+<<<<<<< HEAD
   border-radius: 5px;
   background-color: rgb(240, 240, 240);
   width: 100%;
@@ -78,54 +105,156 @@ a {
   background-color: rgb(240, 240, 240);
   margin-top: 5px;
   width: 100%;
+=======
+ border-radius: 5px;
+ background-color: rgb(240, 240, 240);
+ width: 100%;
+}
+
+.email-input {
+ border-radius: 5px;
+ background-color: rgb(240, 240, 240);
+ margin-top: 5px;
+ width: 100%;
+}
+
+.password-input {
+ border-radius: 5px;
+ background-color: rgb(240, 240, 240);
+ margin-top: 5px;
+ width: 100%;
+}
+
+.enter-button {
+ border-radius: 5px;
+ background-color: rgb(240, 240, 240);
+ margin-top: 5px;
+ width: 100%;
+>>>>>>> Acoffee
 }
 
 
 #form label {
-  color: #666;
-  display: inline-block;
-  margin-bottom: 10px;
-  text-align: center;
-  width: 100%;
+ color: #666;
+ display: inline-block;
+ margin-bottom: 10px;
+ text-align: center;
+ width: 100%;
 }
 
 #form input,
 #form button {
-  box-sizing: border-box;
-  font-size: 14px;
-  outline: 0;
-  padding: 4px;
-  width: 100%;
+ box-sizing: border-box;
+ font-size: 14px;
+ outline: 0;
+ padding: 4px;
+ width: 100%;
 }
 
 #form button {
-  background: #43a3e6;
-  border: 1px solid #43a3e6;
-  border-radius: 4px;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 14px;
-  padding: 8px 16px;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: .3s ease background;
-  width: 100%;
+ background: #43a3e6 ;
+ border: 1px solid #43a3e6 ;
+ border-radius: 4px;
+ color: #fff;
+ cursor: pointer;
+ display: inline-block;
+ font-size: 14px;
+ padding: 8px 16px;
+ text-decoration: none;
+ text-transform: uppercase;
+ transition: .3s ease background;
+ width: 100%;
 }
 
 #form button:hover {
-  background: #fff;
-  color: #43a3e6;
-  transition: .3s ease background;
+ background: #fff;
+ color: #43a3e6 ;
+ transition: .3s ease background;
 }
 
 .error-message {
-  background: #F02B63;
-  box-sizing: border-box;
-  color: #fff;
-  margin: 20px auto;
-  padding: 20px;
-  width: 100%;
+ background: #F02B63 ;
+ box-sizing: border-box;
+ color: #fff;
+ margin: 20px auto;
+ padding: 20px;
+ width: 100%;
+}
+
+#item-form {
+ display: inline-block;
+}
+
+.item {
+ width: 100%;
+ height: 50px;
+}
+
+#new-items {
+ height: 100px;
+ width: 40%;
+}
+
+#welcome-user {
+ font-size: 1em;
+}
+
+
+/*BUTTONS*/
+#suggestion-button {
+ width: 85px;
+ height: 40px;
+ /*float: right;*/
+ background-color: black;
+ border: 1px solid white;
+ border-radius: 5px;
+ color: white;
+ padding-left: 5px;
+ padding-top: 14px;
+
+ /*margin-right: 15px;*/
+ /*margin-top: 8px;*/
+}
+
+#suggestion-button:active {
+ background-color: rgb(111, 144, 84);
+ box-shadow: 0 2px #666;
+ transform: translateY(4px);
+}
+
+#log-out {
+ width: 85px;
+ height: 35px;
+ /*float: right;*/
+ background-color: black;
+ border: 1px solid white;
+ border-radius: 5px;
+ color: white;
+ padding-left: 20px;
+ padding-top: 14px;
+
+ /*margin-right: 15px;*/
+ /*margin-top: 8px;*/
+}
+
+#log-out:active {
+ background-color: rgb(111, 144, 84);
+ box-shadow: 0 2px #666;
+ transform: translateY(4px);
+}
+
+#sign-up-form {
+ height: 350px;
+ margin-top: 40px;
+ border-radius: 5px;
+ border: .5px solid black;
+}
+html,
+body,
+#map-canvas {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 #item-form {

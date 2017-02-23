@@ -3,6 +3,9 @@ var router = express.Router();
 var Item = require('../models/item');
 
 /* GET users listing. */
+router.get('/map', function (req,res,next){
+    res.render('fix/map');
+});
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
@@ -73,6 +76,13 @@ Item.remove( { _id: req.params.id }, function(err){
 
 
 
+//api/newItem
+router.get('api/newItem/test', function(req, res, next) {
+  var category = req.query.category;
+  Item.find({category: category}, (err,items) => {
+    res.json(items);
+  });
+});
 
 
 module.exports = router;

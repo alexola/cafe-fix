@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const itemSchema = new Schema({
+
   name: String,
   pickupDate: Date,
   category: Array,
@@ -12,6 +13,11 @@ const itemSchema = new Schema({
         enum: ['fixed', 'broken'],
         default: 'broken'
     },
+
+  // location: {
+  //     type: "Point",
+  //     coordinates: [long, lat]
+  //   }
 });
 
 

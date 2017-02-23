@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="javascripts/main.js" type="text/javascript"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css'>
+
+
+</head>
+<!-- check out user name to fix -->
+<h1> Suggestions for , <span><%= user %></span> </h1>
+<!-- put some icons for the different categories on top of the button -->
+<button  type="button"   id="textil" class="trigger">Textil</button>
+<button  type="button" id="handcraft" class="trigger">HandCraft</button>
+<button  type="button" id="tecnology" class="trigger">Tecnology</button>
+
+<form id="item-display">
+    <ul action="/suggestion">
+        <li>Carpet</li>
+        <li>Mr.Whisky</li>
+        <li>Furby</li>
+    </ul>
+
+</form>
+
+<div id="display"></div>
+<a href="/users/map">map</a>

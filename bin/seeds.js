@@ -1,15 +1,16 @@
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/coffee-fix');
-
-
-
 const User = require('../models/user');
+var salt = bcrypt.genSaltSync(bcryptSalt);
+
+const password = "1234";
+var encryptedPass = bcrypt.hashSync(password, salt);
 
 const users = [
   {
     name: 'Alejandro Olalde',
     email: "alexola.22@gmail.com",
-    password: "1234",
+    password: encryptedPass,
     isFixer: true,
     fee: 20
   }
