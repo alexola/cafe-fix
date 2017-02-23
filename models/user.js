@@ -9,6 +9,8 @@ const userSchema = new Schema({
  fee: { type: Number, default: null },
  postcode_localities: String,
  location: { type: { type: String }, coordinates: [Number] }
+ 
+
 });
 
 

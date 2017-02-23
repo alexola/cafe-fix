@@ -1,7 +1,6 @@
 $(document).ready(function() {
 
-
-//ADDING ITEMS TO PAGE AND TO DATABASE WITH AJAX CALL
+  //ADDING ITEMS TO PAGE AND TO DATABASE WITH AJAX CALL
   $("#add-item-button").click(function(event) { // catch the form's submit event
 
     event.preventDefault();
@@ -23,8 +22,8 @@ $(document).ready(function() {
       user:  theUserId //MUST BE CURRENT USER
     };
 
-    // var deleteButton = $('<button></button>');
-    // deleteButton.addClass("delete-item");
+    var deleteButton = $('<button></button>');
+    deleteButton.addClass("delete-item");
 
     // console.log(deleteButton);
 
@@ -36,10 +35,13 @@ $(document).ready(function() {
           contentType: 'application/json',
           data: JSON.stringify(data),
           dataType: 'json',   // get the data
-          success: function(response) { // on success..
+          success: function(item) { // on success..
             console.log("inside ajax call success");
-            console.log(response);
-            $('#new-items').append("<p>" + response.name + "</p>"); // update the DIV
+            console.log(item);
+
+            var str = `<li>${item.name}<button class='delete-item' data='${item._id}'>Delete Item</button></li>`;
+
+            $('#new-items').append(str); // update the DIV
           },
           error: function(err){
             console.log("inside ajax call fail");
@@ -66,11 +68,11 @@ $(document).ready(function() {
 
 });
 
-  $("#delete-item").click(function(event) {
+  $("body").on("click", ".delete-item",function(event) {    //Go through entire body first
 
     event.preventDefault();
 
-    var theItemId = $("#item-id").val();
+    var theItemId = $(event.currentTarget).attr('data');
 
 
     $.ajax({      // create an AJAX call...
@@ -82,8 +84,10 @@ $(document).ready(function() {
       success: function(response) { // on success..
         console.log("inside ajax call success");
         console.log(response);
-        $('#new-items').remove("<p>" + response.name + "</p>"); // update the DIV
-      },
+        console.log('delete: ', $(this));
+        $(this).parent().remove(); // this = the delete button.  The parent is the list item...
+
+      }.bind(this),
       error: function(err){
         console.log("inside ajax call fail");
         console.log(err);
@@ -92,12 +96,6 @@ $(document).ready(function() {
 
 
 });
-
-
-  //
-  // $(".suggestion-button").click(function() {
-
-
 
 
 // mirar el button de abajo porque "button"coge toda los botones
@@ -113,7 +111,7 @@ $(document).ready(function() {
               console.log(response);
               $("#display").empty(("<li>"));
               response.forEach(function(element){
-// works
+
 
                 $("#display").append("<li>" + element.name + "</li>");
 
@@ -126,7 +124,6 @@ $(document).ready(function() {
 
    });
   });
-//
 
 
 });

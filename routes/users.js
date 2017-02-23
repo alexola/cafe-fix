@@ -34,12 +34,12 @@ router.post("/api/newItem", function(req,res,next){
 
     let item = req.body;
 
-   Item.create( item, (err, response)=>{
+   Item.create( item, (err, item)=>{
      if (err) {
        res.status(500).json(err);
      } else {
-       console.log('response json', response);
-       res.status(200).json(response);
+       console.log('Item create: ', item);
+       res.status(200).json(item);
      }
    });
 
@@ -52,12 +52,14 @@ router.delete("/api/oldItem/:id", function(req,res,next){
 
   console.log(req.params.id);
 
-Item.remove( { _id: req.params.id }, function(err){
-  if (!err) {
-        console.log("WORKS!");
+Item.remove( { _id: req.params.id }, function(err, doc){
+  if (err) {
+    console.log("ERROR!");
+    res.status(500).json(err);
   }
   else {
-          console.log("ERROR!");
+    console.log(doc);
+    res.status(200).json(doc);
   }
 });
 

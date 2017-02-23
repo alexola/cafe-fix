@@ -129,6 +129,11 @@ router.get("/logout", (req, res) => {
   // becasuse when we calling req.logout() is leaving an empty object inside both properties.
   res.redirect('/');
 });
+
+
+
+
+
 // router.get('/profile', (req, res, next) => {
 //  const userName = req.session.currentUser.name;
 // User.find({}, (err, users) => {
