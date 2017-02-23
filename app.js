@@ -17,7 +17,6 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 var authController = require('./routes/authController');
-const fixing = require("./routes/fixing");
 
 const session    = require("express-session");
 const MongoStore = require("connect-mongo")(session);
@@ -65,7 +64,7 @@ app.use(auth.setCurrentUser);
 // app.use('/', index);
 app.use('/users', users);
 app.use('/', authController);
-app.use("/", fixing);
+// app.use("/", fixing);
 // app.use('/api', apiroiute) to implement in the future not now
 
 
