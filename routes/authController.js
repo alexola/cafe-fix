@@ -4,9 +4,13 @@ const User = require('../models/user');
 const Item = require('../models/item');
 const auth    = require('../helpers/auth');
 const router = express.Router();
+
 const passport 			= require('passport');
+
 const LocalStrategy = require("passport-local").Strategy;
 const bcryptSalt = 10;
+
+router.get("/suggestion", (req, res, err) => {
 
 
 router.get('/', function(req, res, next) {
@@ -21,9 +25,19 @@ router.get('/profile', auth.checkLoggedIn('You must be logged in', '/login'), fu
     } else {
         console.log('items ', items);
         res.render('fixers/fixer-profile', { user: req.user, items: items });
-    }
+      }
   });
+  User.find({}, (err, user) => {
+    if (err) {
+      next(err);
+  } else {
+      res.render('fix/suggestion', {
+        user: req.user
+    });
+  }
+});
 
+  });
 });
 
 // router.get("/suggestion", (req, res, err) => {
@@ -43,6 +57,7 @@ router.get('/signup', function(req, res, next) {
   res.render('auth/signup', { "message": req.flash("error") });
 });
 
+<<<<<<< HEAD
 router.post("/signup", (req, res, next) => {
   var name = req.body.name;
   var email = req.body.email;
@@ -98,6 +113,8 @@ router.post("/signup", (req, res, next) => {
 
 router.get("/login", (req, res, next) => {
   res.render("auth/login", { "message": req.flash("error") });
+
+
 });
 
 router.post("/login", passport.authenticate("local", {
@@ -107,6 +124,7 @@ router.post("/login", passport.authenticate("local", {
   passReqToCallback: true
 }));
 
+
 router.get("/logout", (req, res) => {
   req.logout();
   delete res.locals.currentUser;
@@ -114,9 +132,19 @@ router.get("/logout", (req, res) => {
   // delete currentUser and passport properties
   // becasuse when we calling req.logout() is leaving an empty object inside both properties.
   res.redirect('/');
-
-
 });
+// router.get('/profile', (req, res, next) => {
+//  const userName = req.session.currentUser.name;
+// User.find({}, (err, users) => {
+//
+//   if (err) { return next(err)}
+//    res.render('fixers/fixer-profile', {
+//     users : userName
+//
+//   });
+// });
+// });
+
 
 
 

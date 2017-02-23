@@ -17,7 +17,8 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 var authController = require('./routes/authController');
-const fixing = require("./routes/fixing");
+// const fixing = require("./routes/fixing");
+
 
 const session    = require("express-session");
 const MongoStore = require("connect-mongo")(session);
@@ -65,26 +66,26 @@ app.use(auth.setCurrentUser);
 // app.use('/', index);
 app.use('/users', users);
 app.use('/', authController);
-app.use("/", fixing);
 // app.use('/api', apiroiute) to implement in the future not now
+// app.use("/", fixing);
 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+ var err = new Error('Not Found');
+ err.status = 404;
+ next(err);
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+ // set locals, only providing error in development
+ res.locals.message = err.message;
+ res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+ // render the error page
+ res.status(err.status || 500);
+ res.render('error');
 });
 // app.use(function(err, req, res, next) {
 //   // set locals, only providing error in development

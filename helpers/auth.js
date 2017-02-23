@@ -1,4 +1,5 @@
 module.exports = {
+
 	setCurrentUser: function(req, res, next) {
 	  if (req.session.passport) {
 	    res.locals.currentUser = req.session.passport;
@@ -21,5 +22,4 @@ module.exports = {
 	    }
 	  };
 	},
-
 };
