@@ -4,18 +4,14 @@ const User = require('../models/user');
 const Item = require('../models/item');
 const auth    = require('../helpers/auth');
 const router = express.Router();
-
 const passport 			= require('passport');
-
 const LocalStrategy = require("passport-local").Strategy;
 const bcryptSalt = 10;
-
-router.get("/suggestion", (req, res, err) => {
-
 
 router.get('/', function(req, res, next) {
   res.render('index');
 });
+// router.get("/suggestion", (req, res, err) => {
 
 router.get('/profile', auth.checkLoggedIn('You must be logged in', '/login'), function(req, res, next) {
   console.log('user ', req.user);
@@ -27,17 +23,17 @@ router.get('/profile', auth.checkLoggedIn('You must be logged in', '/login'), fu
         res.render('fixers/fixer-profile', { user: req.user, items: items });
       }
   });
-  User.find({}, (err, user) => {
-    if (err) {
-      next(err);
-  } else {
-      res.render('fix/suggestion', {
-        user: req.user
-    });
-  }
-});
+//   User.find({}, (err, user) => {
+//     if (err) {
+//       next(err);
+//   } else {
+//       res.render('fix/suggestion', {
+//         user: req.user
+//     });
+//   }
+// });
 
-  });
+  // });
 });
 
 // router.get("/suggestion", (req, res, err) => {
@@ -57,7 +53,7 @@ router.get('/signup', function(req, res, next) {
   res.render('auth/signup', { "message": req.flash("error") });
 });
 
-<<<<<<< HEAD
+
 router.post("/signup", (req, res, next) => {
   var name = req.body.name;
   var email = req.body.email;
