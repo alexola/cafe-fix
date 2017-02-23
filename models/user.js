@@ -6,7 +6,9 @@ const userSchema = new Schema({
  email: String,
  password: String,
  isFixer: { type: Boolean, default: false },
- fee: { type: Number, default: null }
+ fee: { type: Number, default: null },
+ postcode_localities: String,
+ location: { type: { type: String }, coordinates: [Number] }
 });
 
 

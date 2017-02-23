@@ -5,6 +5,7 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="javascripts/main.js" type="text/javascript"></script>
+  <script src="javascripts/profile.js" type="text/javascript"></script>
 
   <link rel='stylesheet' href='/stylesheets/style.css'>
 
@@ -27,7 +28,7 @@
  <div id="welcome-user">
    <img id="profile-picture" class="img-circle" class="span4"
     src="http://i1.wp.com/www.thisblogrules.com/wp-content/uploads/2010/02/batman-for-facebook.jpg?resize=250%2C280">
-  <h2 id="welcome-name"> Welcome back, <%= user.name %> ! </h2>
+  <h2 id="welcome-name"> Welcome back, <%= user.name %>! </h2>
   </div>
 
 
@@ -46,21 +47,41 @@
                 <li><input type="checkbox" name="category" id="electronics" value="Electronics">Electronics<br></li>
                 <li><input type="checkbox" name="category" id="textiles" value="Clothing"> Clothing/Textiles <br></li>
                 <li><input type="checkbox" name="category" id="toys" value="Toys">Toys<br></li>
+                <li><input type="checkbox" name="category" id="furniture" value="Furniture">Furniture<br></li>
+                <li><input type="checkbox" name="category" id="appliances" value="Appliances">Appliances<br></li>
               </ul>
       </div>
       <button type="button" name="Add" value="add" id="add-item-button">Add</button>
 
     <!-- INVISIBLE USER ID INPUT -->
       <input type="text" id="user-id" value="<%= user._id%>">
+
+
+
+
       <!-- <input type="submit" name="Remove" value="remove"> -->
 
     </form>
 
     <div id="new-items">
       <table>
+
+      <!-- USER ITEMS -->
       <thead>Your Items</thead>
 
+      <% items.forEach((item) => { %>
+
+        <li><%= item.name %>
+
+        <button id="delete-item">Delete Item</button>
+        <input type="text" id="item-id" value="<%= item._id%>">
+        </li>
+
+      <%  }) %>
+
+
       </table>
+
 
     </div>
 

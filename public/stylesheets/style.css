@@ -13,6 +13,10 @@ body {
 
 }
 
+#carousel-inner {
+  height: 500px;
+}
+
 #profile-picture {
   height: 80px;
   width: 80px;
@@ -63,6 +67,10 @@ a {
 }
 
 #user-id {
+  visibility: hidden;
+}
+
+#item-id {
   visibility: hidden;
 }
 .enter-button {

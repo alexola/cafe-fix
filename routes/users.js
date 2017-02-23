@@ -1,31 +1,76 @@
 var express = require('express');
 var router = express.Router();
-var Item = require('../models/item')
+var Item = require('../models/item');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-//POST TO ITEMS COLLECTION
-router.post('/api', function(req, res, next) {
- var category = req.query.category;
- Item.find({category: category}, (err,items) => {
-   res.json(items);
+
+//GET FROM ITEMS DB
+router.get('/api/newItem', function(req, res, next) {
+ // var category = req.query.category;
+ // var userItem = req.query._id;
+
+ Item.find({}, (err,items) => {
+   if (err){
+     res.status(500).json(err);
+   } else {
+      console.log('items: ', items);
+      res.status(200).json(items);
+   }
+  //  console.log(items.length);
  });
 });
 
+
+
+//POST NEW ITEMS TO DB
 router.post("/api/newItem", function(req,res,next){
-  console.log(req.body)
-   Item.create({name: req.body.name, category: req.body['category[]']}, (err, item)=>{
+
+    let item = req.body;
+
+   Item.create( item, (err, response)=>{
      if (err) {
-       console.log(err);
+       res.status(500).json(err);
      } else {
-       res.json(item);
+       console.log('response json', response);
+       res.status(200).json(response);
      }
    });
 
 });
+
+
+
+// DELETE ITEMS FROM DB
+router.delete("/api/oldItem/:id", function(req,res,next){
+
+  console.log(req.params.id);
+
+Item.remove( { _id: req.params.id }, function(err){
+  if (!err) {
+        console.log("WORKS!");
+  }
+  else {
+          console.log("ERROR!");
+  }
+});
+
+  //   let itemId = req.item._id;
+   //
+  //  Item.delete( itemId, (err, response)=>{
+  //    if (err) {
+  //      res.status(500).json(err);
+  //    } else {
+  //      console.log('response json', response);
+  //      res.status(200).json(response);
+  //    }
+  //  });
+
+});
+
 
 
 

@@ -14,9 +14,29 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/profile', auth.checkLoggedIn('You must be logged in', '/login'), function(req, res, next) {
-  console.log(req.user);
-  res.render('fixers/fixer-profile', { user: req.user });
+  console.log('user ', req.user);
+  Item.find({user: req.user._id}, (err,items) => {
+    if (err){
+      next(err);
+    } else {
+        console.log('items ', items);
+        res.render('fixers/fixer-profile', { user: req.user, items: items });
+    }
+  });
+
 });
+
+// router.get("/suggestion", (req, res, err) => {
+//
+// User.find({}, (err, user)  => {
+//   if (err) {
+//     next(err);
+//   } else {
+//     res.render(7', { user: req.user});
+//   }
+// });
+//
+// });
 
 
 router.get('/signup', function(req, res, next) {

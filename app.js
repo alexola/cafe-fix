@@ -66,6 +66,8 @@ app.use(auth.setCurrentUser);
 app.use('/users', users);
 app.use('/', authController);
 app.use("/", fixing);
+// app.use('/api', apiroiute) to implement in the future not now
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
