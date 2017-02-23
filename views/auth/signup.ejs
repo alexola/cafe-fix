@@ -1,36 +1,72 @@
-<h2> Sign Up </h2>
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<% if (errorMessage) { %>
- <p class="error-message">
-   <%= errorMessage %>
- </p>
-<% } %>
+   <title>MEND</title>
+   <link href="https://fonts.googleapis.com/css?family=Comfortaa|Orbitron" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+   <link rel='stylesheet' href='/stylesheets/style.css' />
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<form action="/signup" method="post">
- <div>
-   <label for="name-input"> Name </label>
-   <input type="text" name="name" id="name-input"
-     placeholder="e.g., Diana Prince">
- </div>
 
- <div>
-   <label for="email-input"> Email </label>
-   <input type="email" name="email" id="email-input"
-     placeholder="e.g., diana@themyscira.agency">
- </div>
+ </head>
+ <body>
+   <div class="navbar">
+       <div id="header">mend</div>
+   </div>
 
- <div>
-   <label for="password-input"> Password </label>
-   <input type="password" name="password" id="password-input"
-     placeholder="e.g., ••••••••••••">
- </div>
+   <div class="container">
+     <!-- Column 1 -->
+     <div class="col-xs-4"></div>
 
- <button> Create New Account </button>
-</form>
+     <!-- Column 2 -->
+     <div class="col-xs-4">
+       <div class="row">
+         <div class="col-xs-2"></div>
 
-<p>
- Already have an account?
- <a href="/login">
-   Log in.
- </a>
-</p>
+       <!-- Sign Up Form  -->
+       <!-- Need Error message!!!  Wasn't working with errorMessage Javascript Id -->
+       <div class="col-xs-8">
+             <h2 class="form-title"> Sign Up </h2>
+
+             <form action="/signup" method="post">
+              <div>
+                <input type="text" name="name" class="name-input"
+                  placeholder="Name">
+              </div>
+
+              <div>
+                <input type="email" name="email" class="email-input"
+                  placeholder="Email">
+              </div>
+
+              <div>
+                <input type="password" name="password" class="password-input"
+                  placeholder="Create a password">
+              </div>
+
+              <button class="enter-button"> Create Account </button>
+             </form>
+
+             <p>
+              Already have an account?
+              <a href="/login">
+                Log in.
+              </a>
+             </p>
+       </div>
+       <div class="col-xs-2"></div>
+     </div>
+
+
+     </div>
+   </div>
+
+   <!-- Column 3 -->
+   <div class="col-xs-4"></div>
+
+
+ </body>
+</html>
