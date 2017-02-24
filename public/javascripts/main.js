@@ -50,20 +50,7 @@ $(document).ready(function() {
     });
 
 
-//     $.ajax({
-//       url: "/users/api/newItem",                  //WORKS
-//       method: "GET",
-//       data: data.name,
-//       // data: JSON.stringify(data),
-//       dataType: 'json',
-//        success: function (response) {
-//             console.log("Inside get success");
-//             console.log(response);
-//        },
-//        error: function (err) {
-//        console.log(err);
-//        },
-// });
+
 
 
 });
@@ -78,9 +65,6 @@ $(document).ready(function() {
     $.ajax({      // create an AJAX call...
       url: "/users/api/oldItem/" + theItemId, // the file to call
       type: "DELETE",
-       // POST
-      // contentType: 'application/json',
-     // get the data
       success: function(response) { // on success..
         console.log("inside ajax call success");
         console.log(response);

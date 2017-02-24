@@ -6,21 +6,17 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const flash          = require("connect-flash");
 const bcrypt             = require('bcrypt');
-// const passport           = require('passport');
 const passport = require('./helpers/passport');
 const auth           = require('./helpers/auth');
 const LocalStrategy      = require('passport-local').Strategy;
 const connectSession = require("connect-ensure-login");
 
 
-var index = require('./routes/index');
+
 var users = require('./routes/users');
 
 var authController = require('./routes/authController');
 
-// const fixing = require("./routes/fixing");
-
-// >>>>>>> 55a46958ea54da016838a7f5f7baca08b43e9644
 
 const session    = require("express-session");
 const MongoStore = require("connect-mongo")(session);
@@ -52,26 +48,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-// app.use((req, res, next) => {
-//  if (req.session.currentUser) {
-//    res.locals.currentUserInfo = req.session.currentUser;
-//    res.locals.isUserLoggedIn = true;
-//  } else {
-//    res.locals.isUserLoggedIn = false;
-//  }
-//
-//  next();
-// });
 
 
 app.use(auth.setCurrentUser);
-// app.use('/', index);
 app.use('/users', users);
 app.use('/', authController);
 
-// >>>>>>> 55a46958ea54da016838a7f5f7baca08b43e9644
-// app.use('/api', apiroiute) to implement in the future not now
-// app.use("/", fixing);
 
 
 // catch 404 and forward to error handler
@@ -91,14 +73,5 @@ app.use(function(err, req, res, next) {
  res.status(err.status || 500);
  res.render('error');
 });
-// app.use(function(err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {};
-//
-//   // render the error page
-//   res.status(err.status || 500);
-//   res.render('error');
-// });
 
 module.exports = app;
