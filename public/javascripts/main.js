@@ -1,4 +1,8 @@
-$(document).ready(function(){
+
+$(document).ready(function() {
+
+  //ADDING ITEMS TO PAGE AND TO DATABASE WITH AJAX CALL
+
 
   $("#add-item-button").click(function(event) {
     event.preventDefault();
@@ -16,6 +20,11 @@ $(document).ready(function(){
     };
 
 
+    var deleteButton = $('<button></button>');
+    deleteButton.addClass("delete-item");
+
+
+
     console.log(data);
 
         $.ajax({
@@ -23,11 +32,15 @@ $(document).ready(function(){
           type: "POST",
           contentType: 'application/json',
           data: JSON.stringify(data),
-          dataType: 'json',
-          success: function(response) {
+          dataType: 'json',   // get the data
+          success: function(item) { // on success..
             console.log("inside ajax call success");
-            console.log(response);
-            $('#new-items').append("<p>" + response.name + "</p>");
+            console.log(item);
+
+            var str = `<li class="table-item">${item.name}<button class='delete-item' data='${item._id}'>Delete Item</button></li>`;
+
+            $('#new-items').append(str); // update the DIV
+
           },
           error: function(err){
             console.log("inside ajax call fail");
@@ -36,36 +49,46 @@ $(document).ready(function(){
     });
 
 
-    $.ajax({
-      url: "/users/api/newItem",
-      method: "GET",
-      data: data.name,
-      dataType: 'json',
-       success: function (response) {
-            console.log("Inside get success");
-            console.log(response);
-       },
-       error: function (err) {
-       console.log(err);
-       },
-     });
-   });
+// <<<<<<< HEAD
+//     $.ajax({
+//       url: "/users/api/newItem",
+//       method: "GET",
+//       data: data.name,
+//       dataType: 'json',
+//        success: function (response) {
+//             console.log("Inside get success");
+//             console.log(response);
+//        },
+//        error: function (err) {
+//        console.log(err);
+//        },
+//      });
+//    });
 
-  $("#delete-item").click(function(event) {
+
+
+
+});
+
+
+  $("body").on("click", ".delete-item",function(event) {    //Go through entire body first
 
     event.preventDefault();
 
-    var theItemId = $("#item-id").val();
+    var theItemId = $(event.currentTarget).attr('data');
 
 
     $.ajax({
       url: "/users/api/oldItem/" + theItemId,
       type: "DELETE",
-      success: function(response) {
+      success: function(response) { // on success..
         console.log("inside ajax call success");
         console.log(response);
-        $('#new-items').remove("<p>" + response.name + "</p>");
-      },
+        console.log('delete: ', $(this));
+        $(this).parent().remove(); // this = the delete button.  The parent is the list item...
+
+      }.bind(this),
+
       error: function(err){
         console.log("inside ajax call fail");
         console.log(err);
@@ -75,6 +98,9 @@ $(document).ready(function(){
 
 
 
+
+
+// mirar el button de abajo porque "button"coge toda los botones
 
   $(".trigger").on('click', function (event) {
     var category = $(this).attr("id");
@@ -90,6 +116,8 @@ $(document).ready(function(){
               $("#displayUser").empty(("<div>"));
               $("#displayEmail").empty(("<a href=>"));
               response.forEach(function(element){
+
+
                 $("#display").append("<li>" + element.name + "</li>");
 
                 $.ajax({
@@ -113,5 +141,7 @@ $(document).ready(function(){
          console.log(err);
        },
    });
+
  });
-});
+
+  });
