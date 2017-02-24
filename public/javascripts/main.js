@@ -39,7 +39,7 @@ $(document).ready(function() {
             console.log("inside ajax call success");
             console.log(item);
 
-            var str = `<li>${item.name}<button class='delete-item' data='${item._id}'>Delete Item</button></li></br>`;
+            var str = `<li class="table-item">${item.name}<button class='delete-item' data='${item._id}'>Delete Item</button></li>`;
 
             $('#new-items').append(str); // update the DIV
           },
