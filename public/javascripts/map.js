@@ -1,13 +1,30 @@
 function init() {
   var pleis = {lat: 41.386,
                 lng:2.1888};
+  var yo ={
+              lat: 41.3850,
+              lng: 2.1730
+            };
+
+  var tu = {
+            lat: 41.396716,
+            lng: 2.1588186
+  };
+  var mathias = {
+            lat: 41.403546,
+            lng: 2.1894717
+  };
+  var charlie = {
+            lat: 41.410678,
+            lng:2.2263421
+  };
 
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
         center: {
-            lat: 41.3851,
-            lng: 2.1734
+            lat: 54.5260,
+            lng: 15.2551
         },
-        zoom: 12
+        zoom: 3
     });
 
 
@@ -28,44 +45,36 @@ function init() {
         for (i = 0; place = places[i]; i++) {
             (function(place) {
                 var marker = new google.maps.Marker({
-
+                  animation: google.maps.Animation.DROP,
                     position: place.geometry.location
-
                 });
-
-                // for each users
-
-                // $("button").on('click', function (event) {
-                //   var category = $(this).attr("id");
-                //   event.preventDefault();
-                //   console.log(category);
-                //     $.ajax({
-                //       url: "/users/api",
-                //       method: "GET",
-                //       data: {category: category},
-                //        success: function (response) {
-                //             console.log(response);
-                //             $("#display").empty(("<li>"));
-                //             response.forEach(function(element){
-                //
-                //               $("#display").append("<li>" + element.name + "</li>");
-                //
-                //             });
-                //
-                //        },
-                //        error: function (err) {
-                //        console.log(err);
-                //        },
-
-
-
-                //
                 new google.maps.Marker({
+                  animation: google.maps.Animation.DROP,
                   position: pleis,
                   map: map
                 });
+                new google.maps.Marker({
+                  animation: google.maps.Animation.DROP,
+                  position: yo,
+                  map: map
+                });
+                new google.maps.Marker({
+                  animation: google.maps.Animation.DROP,
+                  position:tu,
+                  map:map
+                });
+                new google.maps.Marker({
+                  animation: google.maps.Animation.DROP,
+                  position:mathias,
+                  map:map
+                });
+                new google.maps.Marker({
+                  animation: google.maps.Animation.DROP,
+                  position:charlie,
+                  map:map
+                });
                 marker.addListener('click', function() {
-                  map.setZoom(15);
+                  map.setZoom(14);
                   map.setCenter(marker.getPosition());
                 });
 
@@ -76,25 +85,15 @@ function init() {
                     }
                 });
                 bounds.extend(place.geometry.location);
-
-
             }(place));
-
         }
         map.fitBounds(bounds);
         searchBox.set('map', map);
         map.setZoom(Math.min(map.getZoom(), 12));
-
     });
-
-// searching address bar to get the geolocalization
-// works to mak it work anywhere just change the searchbar id
-// also use google API
-// then got to connect to the user database to save the position to get thru the map
-
     $('#pac-input').change(function() {
 
-// MONGODB requires LONGITUDE first when passing LONG and LAT
+
  var service = new google.maps.places.PlacesService(document.createElement("div"));
 
 
@@ -104,15 +103,14 @@ function init() {
    query: $("#pac-input").val()
  };
 
- service.textSearch(request, function(places){
-   const lat = places[0].geometry.location.lat();
-   const long = places[0].geometry.location.lng();
+ service.textSearch(request, function(places) {
+            const lat = places[0].geometry.location.lat();
+            const long = places[0].geometry.location.lng();
 
-   $("#lat").val(lat);
-   $("#long").val(long);
+            $("#lat").val(lat);
+            $("#long").val(long);
 
+  });
  });
-
-});
 }
 google.maps.event.addDomListener(window, 'load', init);

@@ -23,23 +23,26 @@ router.get('/profile', auth.checkLoggedIn('You must be logged in', '/login'), fu
         res.render('fixers/fixer-profile', { user: req.user, items: items });
       }
   });
-//   User.find({}, (err, user) => {
-//     if (err) {
-//       next(err);
-//   } else {
-//       res.render('fix/suggestion', {
-//         user: req.user
-//     });
-//   }
-// });
+});
+router.get("/suggestion", auth.checkLoggedIn('You must be logged in', '/login'), (req, res, err) => {
 
-  // });
+    User.find({}, (err, user) => {
+        if (err) {
+            next(err);
+        } else {
+            res.render('fix/suggestion', {
+                user: req.user
+            });
+        }
+    });
+
 });
 
 // router.get("/suggestion", (req, res, err) => {
 //
 // User.find({}, (err, user)  => {
 //   if (err) {
+
 //     next(err);
 //   } else {
 //     res.render(7', { user: req.user});
@@ -47,7 +50,9 @@ router.get('/profile', auth.checkLoggedIn('You must be logged in', '/login'), fu
 // });
 //
 // });
-
+router.get('/suggestion', function(req, res, next) {
+  res.render('fix/suggestion', { "message": req.flash("error") });
+});
 
 router.get('/signup', function(req, res, next) {
   res.render('auth/signup', { "message": req.flash("error") });
