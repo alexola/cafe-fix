@@ -1,27 +1,75 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvbZE0GM5MCMkrn70jbMRp-01JB4cYqUQ&libraries=places">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Orbitron" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="javascripts/main.js" type="text/javascript"></script>
     <link rel='stylesheet' href='/stylesheets/style.css'>
+    <script type="text/javascript" src="/javascripts/map.js"></script>
 
 
 </head>
-<!-- check out user name to fix -->
-<h1> Suggestions for , <span><%= user %></span> </h1>
-<!-- put some icons for the different categories on top of the button -->
-<button  type="button"   id="textil" class="trigger">Textil</button>
-<button  type="button" id="handcraft" class="trigger">HandCraft</button>
-<button  type="button" id="tecnology" class="trigger">Tecnology</button>
 
-<form id="item-display">
-    <ul action="/suggestion">
-        <li>Carpet</li>
-        <li>Mr.Whisky</li>
-        <li>Furby</li>
-    </ul>
 
-</form>
+<body>
 
-<div id="display"></div>
-<a href="/users/map">map</a>
+
+    <h1> Suggestions for , <%= user.name%> </h1>
+
+    <button class="trigger" type="button" id="textiles">Clothing/Textiles</button>
+    <button class="trigger" type="button" id="furniture">Furniture</button>
+    <button class="trigger" type="button" id="electronics">Electronics</button>
+    <button class="trigger" type="button" id="toys">Toys</button>
+    <button class="trigger" type="button" id="appliances">Appliances</button>
+    <button class="trigger" type="button" id="bicycles">Bicycles</button>
+
+
+
+    <table id="UserItemDis" class="table table-inverse" style="width:55%">
+        <thead>
+            <tr>
+                <th scope="row"></th>
+                <th>Name </th>
+                <th>Product </th>
+                <th> <span class="glyphicon glyphicon-envelope"></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row"></th>
+                <td>
+                    <div id="displayUser"></div>
+                </td>
+                <td>
+                    <div id="display"></div>
+                </td>
+                <td>
+                    <div id="displayEmail"></div>
+                </td>
+            </tr>
+            <tbody>
+    </table>
+
+    <form method="POST" action="">
+        <input type="text" id="pac-input">
+    </form>
+
+
+    <br>
+    <div id="map-canvas"></div>
+    <p>
+
+        <!-- <input type="text" id="searchTextField"> -->
+
+        <footer>Copyright &copy; Mend
+        </footer>
+</body>
+
+</html>

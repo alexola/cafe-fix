@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Item = require('../models/item');
+var User = require("../models/user");
+
 
 /* GET users listing. */
 router.get('/map', function (req,res,next){
@@ -77,12 +79,31 @@ Item.remove( { _id: req.params.id }, function(err){
 
 
 //api/newItem
-router.get('api/newItem/test', function(req, res, next) {
+
+router.get('/api/category', function(req, res, next) {
+
   var category = req.query.category;
   Item.find({category: category}, (err,items) => {
     res.json(items);
   });
 });
+// user Api
+router.get('/api/name', function(req, res, next) {
+  var user = req.query.user;
+  console.log(user);
+  User.findById(user, (err,user) => {
+    console.log(user);
+    res.json(user);
+  });
+});
 
+router.get('/api/email',function(req, res, next){
+  var email = req.query.email;
+  console.log (email);
+  User.findById(email, (err, email)=>{
+    console.log(email);
+    res.json(email);
+  });
+});
 
 module.exports = router;

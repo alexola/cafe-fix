@@ -4,8 +4,21 @@
    <title>Places to meet up</title>
    <link rel='stylesheet' href='/stylesheets/style.css' />
    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvbZE0GM5MCMkrn70jbMRp-01JB4cYqUQ&libraries=places"> </script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <link href="https://fonts.googleapis.com/css?family=Comfortaa|Orbitron" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
    <script type="text/javascript" src="/javascripts/map.js"></script>
  </head>
+ <div class="navbar">
+
+   <div id="header">mend</div>
+    <a href="/logout" id="nav-button">Log Out</a>
+    <a href="/suggestion" id="nav-button" class ="suggestion-button">Suggestions</a>
+   <a href="/profile" id="nav-button" class ="map-button">Profile</a>
+
+ </div>
  <body>
    <h1>Close to you</h1>
 <br>
@@ -24,12 +37,11 @@
            width: 100%;
           }
        </style>
-
-
 <div id="map-canvas"></div>
-<div>
+
 <!-- <input type="text" id="searchTextField"> -->
 
+<div id="data">
 Longitude<input type="text" id="long">
 Latitude<input type="text" id="lat">
 

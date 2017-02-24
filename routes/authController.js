@@ -23,18 +23,21 @@ router.get('/profile', auth.checkLoggedIn('You must be logged in', '/login'), fu
         res.render('fixers/fixer-profile', { user: req.user, items: items });
       }
   });
-//   User.find({}, (err, user) => {
-//     if (err) {
-//       next(err);
-//   } else {
-//       res.render('fix/suggestion', {
-//         user: req.user
-//     });
-//   }
-// });
-
-  // });
 });
+router.get("/suggestion", auth.checkLoggedIn('You must be logged in', '/login'), (req, res, err) => {
+
+    User.find({}, (err, user) => {
+        if (err) {
+            next(err);
+        } else {
+            res.render('fix/suggestion', {
+                user: req.user
+            });
+        }
+    });
+
+});
+
 
 router.get("/suggestion", auth.checkLoggedIn('You must be logged in', '/login'), (req, res, err) => {
 
@@ -95,17 +98,7 @@ router.post("/signup", (req, res, next) => {
 });
 
 
-// router.get('/profile', (req, res, next) => {
-//  const userName = req.session.currentUser.name;
-// User.find({}, (err, users) => {
-//
-//   if (err) { return next(err)}
-//    res.render('fixers/fixer-profile', {
-//     users : userName
-//
-//   });
-// });
-// });
+
 
 router.get("/login", (req, res, next) => {
   res.render("auth/login", { "message": req.flash("error") });
@@ -129,97 +122,7 @@ router.get("/logout", (req, res) => {
   // becasuse when we calling req.logout() is leaving an empty object inside both properties.
   res.redirect('/');
 });
-// router.get('/profile', (req, res, next) => {
-//  const userName = req.session.currentUser.name;
-// User.find({}, (err, users) => {
-//
-//   if (err) { return next(err)}
-//    res.render('fixers/fixer-profile', {
-//     users : userName
-//
-//   });
-// });
-// });
 
-
-
-
-
-
-// router.post('/login', (req, res, next) => {
-//  const emailInput = req.body.email;
-//  const passwordInput = req.body.password;
-//
-//  if (emailInput === '' || passwordInput === '') {
-//    res.render('auth/login', {
-//      errorMessage: 'Enter both email and password to log in.'
-//    });
-//    return;
-//  }
-//
-//  User.findOne({ email: emailInput }, (err, theUser) => {
-//    if (err || theUser === null) {
-//      res.render('auth/login', {
-//        errorMessage: `There isn't an account with email ${emailInput}.`
-//      });
-//      return;
-//    }
-//
-//    if (!bcrypt.compareSync(passwordInput, theUser.password)) {
-//      res.render('auth/login', {
-//        errorMessage: 'Invalid password.'
-//      });
-//      return;
-//    }
-//
-//    req.session.currentUser = theUser;
-//    res.redirect('/profile');
-//  });
-// });
-//
-//
-// router.get('/logout', (req, res, next) => {
-//  if (!req.session.currentUser) {
-//    res.redirect('/');
-//    return;
-//  }
-//
-//  req.session.destroy((err) => {
-//    if (err) {
-//      next(err);
-//      return;
-//    }
-//
-//    res.redirect('/');
-//  });
-// });
-//
-
-
-// router.get("/profile/:id", (req, res, next) => {
-//   let userId = req.params.id;
-//   User.findById(userId, (err, users) =>{
-//     if (err) {
-//       next(err);
-//     } else {
-//       res.render("fixers/fixer-profile", {users: user});
-//     }
-//   });
-// });
-
-
-// router.get('/search', (req, res, next) => {
-// User.find({}, (err, users) => {
-//
-//   if (err) { return next(err) }
-//
-//   res.render('map/search', {
-//     users: users
-//   });
-// });
-// });
-//
-//
 
 
 module.exports = router;

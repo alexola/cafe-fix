@@ -1,45 +1,33 @@
-$(document).ready(function() {
+$(document).ready(function(){
 
-
-//ADDING ITEMS TO PAGE AND TO DATABASE WITH AJAX CALL
-  $("#add-item-button").click(function(event) { // catch the form's submit event
-
+  $("#add-item-button").click(function(event) {
     event.preventDefault();
-
-    //SEE WHICH BOXES ARE CHECKED
     var checkedCategories = $(":checked").map(function(){
       return this.getAttribute("id");
     }).get();
 
-    //GET THE HIDDEN USER ID IN THE FORM
     var theUserId = $("#user-id").val();
-    console.log(theUserId);  //THIS WORKS
-
     console.log('checkedCategories:', checkedCategories);
-    //CREATE THE DATA OBJECT FOR AJAX
+
     var data = {
       name: $(".user-item").val(),
       category: checkedCategories,
-      user:  theUserId //MUST BE CURRENT USER
+      user:  theUserId
     };
 
-    // var deleteButton = $('<button></button>');
-    // deleteButton.addClass("delete-item");
-
-    // console.log(deleteButton);
 
     console.log(data);
 
-        $.ajax({      // create an AJAX call...
-          url: "/users/api/newItem", // the file to call
-          type: "POST", // POST
+        $.ajax({
+          url: "/users/api/newItem",
+          type: "POST",
           contentType: 'application/json',
           data: JSON.stringify(data),
-          dataType: 'json',   // get the data
-          success: function(response) { // on success..
+          dataType: 'json',
+          success: function(response) {
             console.log("inside ajax call success");
             console.log(response);
-            $('#new-items').append("<p>" + response.name + "</p>"); // update the DIV
+            $('#new-items').append("<p>" + response.name + "</p>");
           },
           error: function(err){
             console.log("inside ajax call fail");
@@ -48,23 +36,20 @@ $(document).ready(function() {
     });
 
 
-//     $.ajax({
-//       url: "/users/api/newItem",                  //WORKS
-//       method: "GET",
-//       data: data.name,
-//       // data: JSON.stringify(data),
-//       dataType: 'json',
-//        success: function (response) {
-//             console.log("Inside get success");
-//             console.log(response);
-//        },
-//        error: function (err) {
-//        console.log(err);
-//        },
-// });
-
-
-});
+    $.ajax({
+      url: "/users/api/newItem",
+      method: "GET",
+      data: data.name,
+      dataType: 'json',
+       success: function (response) {
+            console.log("Inside get success");
+            console.log(response);
+       },
+       error: function (err) {
+       console.log(err);
+       },
+     });
+   });
 
   $("#delete-item").click(function(event) {
 
@@ -73,60 +58,60 @@ $(document).ready(function() {
     var theItemId = $("#item-id").val();
 
 
-    $.ajax({      // create an AJAX call...
-      url: "/users/api/oldItem/" + theItemId, // the file to call
+    $.ajax({
+      url: "/users/api/oldItem/" + theItemId,
       type: "DELETE",
-       // POST
-      // contentType: 'application/json',
-     // get the data
-      success: function(response) { // on success..
+      success: function(response) {
         console.log("inside ajax call success");
         console.log(response);
-        $('#new-items').remove("<p>" + response.name + "</p>"); // update the DIV
+        $('#new-items').remove("<p>" + response.name + "</p>");
       },
       error: function(err){
         console.log("inside ajax call fail");
         console.log(err);
       }
+    });
 });
 
 
-});
 
 
-  //
-  // $(".suggestion-button").click(function() {
-
-
-
-
-// mirar el button de abajo porque "button"coge toda los botones
   $(".trigger").on('click', function (event) {
     var category = $(this).attr("id");
     event.preventDefault();
-    console.log(category);
       $.ajax({
-        url: "/users/api/newItem/test",
+        url: "/users/api/category",
         method: "GET",
         data: {category: category},
          success: function (response) {
-              console.log(response);
-              $("#display").empty(("<li>"));
-              response.forEach(function(element){
-// works
 
+
+              $("#display").empty(("<li>"));
+              $("#displayUser").empty(("<div>"));
+              $("#displayEmail").empty(("<a href=>"));
+              response.forEach(function(element){
                 $("#display").append("<li>" + element.name + "</li>");
 
-              });
+                $.ajax({
+                  url: "/users/api/name",
+                  method: "GET",
+                  data: {user: element.user},
+                   success: function (user) {
 
-         },
+
+
+                          $("#displayUser").append("<div><td>" + user.name + "</td></div>");
+                          $("#displayEmail").append("<a href=mailto:"+ user.email+">Contact</a><br> ");
+                    },
+                      error: function (err) {
+                        console.log(err);
+                     }
+                    });
+                  });
+                },
          error: function (err) {
          console.log(err);
-         },
-
+       },
    });
-  });
-//
-
-
+ });
 });
